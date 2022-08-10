@@ -35,3 +35,8 @@
 - 빅데이터 분석
   - 지리정보 분석
   - 인프런 강좌내용 따라하기(스타벅스VS이디야)
+
+## PyQt5 1
+- PyQt5 학습
+  - PyQt5, Designer 설치
+  - PyQt5 기본폼 만들기(font, template, label) 
