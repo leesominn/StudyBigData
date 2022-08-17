@@ -15,7 +15,7 @@ class qTemplate(QWidget):
     # 생성자
     def __init__ (self) -> None: # 생성자
         super().__init__() 
-        uic.loadUi('./pyqt02/navernews.ui', self)
+        uic.loadUi('./pyqt02/navermovie.ui', self)
         self.initUI()
     
     def initUI(self) -> None:
@@ -31,13 +31,13 @@ class qTemplate(QWidget):
     # tblResult창 클릭하면 해당 기사링크로 이동하는 함수
     def tblResultSelected(self) -> None:
         selected = self.tblResult.currentRow() # 현재 선택된 열의 인덱스
-        link = self.tblResult.item(selected, 1).text() # tblResult창에서 index[1]인 주소를 가져오는 것
+        link = self.tblResult.item(selected, 2).text() # tblResult창에서 index[1]인 주소를 가져오는 것
         webbrowser.open(link)     
 
     def btnSearchClicked(self) -> None: # 슬롯(이벤트핸들러) 
         jsonResult = []
         totalResult = []
-        keyword = 'news'
+        keyword = 'movie'
         search_word = self.txtSearch.text()
         display_count = 100
 
@@ -54,19 +54,23 @@ class qTemplate(QWidget):
     # 테이블위젯 설정
     def makeTable(self, result):
         self.tblResult.setSelectionMode(QAbstractItemView.SingleSelection) #pyqtDesigner에서 처리해도 가능
-        self.tblResult.setColumnCount(2)
+        self.tblResult.setColumnCount(3) # 2 -> 3
         self.tblResult.setRowCount(len(result)) # result가 50개면 50개 출력(displayCount에 따라서 변경, 현재는 50개로 고정)
-        self.tblResult.setHorizontalHeaderLabels(['기사제목', '뉴스링크'])
-        self.tblResult.setColumnWidth(0, 350)
+        self.tblResult.setHorizontalHeaderLabels(['영화제목', '상영년도', '뉴스링크']) # 제목 추가
+        self.tblResult.setColumnWidth(0, 250)
         self.tblResult.setColumnWidth(1, 100)
+        self.tblResult.setColumnWidth(2, 100) # 세번째 column 설정 추가
         self.tblResult.setEditTriggers(QAbstractItemView.NoEditTriggers) # read only(읽기만 가능)
 
         i = 0
         for item in result:
             title = self.strip_tag(item[0]['title'])
-            link = item[0]['originallink']
-            self.tblResult.setItem(i, 0, QTableWidgetItem(title))
-            self.tblResult.setItem(i, 1, QTableWidgetItem(link))
+            subtitle = self.strip_tag(item[0]['subtitle'])
+            pubDate = item[0]['pubDate']
+            link = item[0]['link']
+            self.tblResult.setItem(i, 0, QTableWidgetItem(f'{title} / {subtitle}'))
+            self.tblResult.setItem(i, 1, QTableWidgetItem(pubDate))
+            self.tblResult.setItem(i, 2, QTableWidgetItem(link))
             i += 1
 
     # html tag 없애는 함수
@@ -83,12 +87,11 @@ class qTemplate(QWidget):
     def getPostData(self, post):
         temp = []
         title= post['title']
-        originallink = post['originallink']
+        subtitle= post['subtitle']
         link = post['link']
-        description = post['description']
         pubDate = post['pubDate']
 
-        temp.append({'title':title, 'originallink':originallink, 'link':link, 'description':description, 'pubDate':pubDate})
+        temp.append({'title':title, 'subtitle':subtitle, 'link':link, 'pubDate':pubDate})
 
         return temp 
 
