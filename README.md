@@ -50,4 +50,4 @@
 - PyQt5 학습
   - 네이버 API로 네이버뉴스 검색데이터 csv로 저장하기
   
-  ! 이미지 (https://raw.githubusercontent.com/leesominn/StudyBigData/main/image/navernews_save.png)
+  ! [이미지] (https://raw.githubusercontent.com/leesominn/StudyBigData/main/image/navernews_save.png)
