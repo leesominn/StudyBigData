@@ -45,3 +45,8 @@
 - PyQt5 학습
   - QtDesigner로 UI 설정
   - 네이버 API로 네이버뉴스, 영화 검색앱 만들기
+
+## PyQt5 3
+- PyQt5 학습
+  - 네이버 API로 네이버뉴스 검색데이터 csv로 저장하기
+  
