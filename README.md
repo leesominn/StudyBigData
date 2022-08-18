@@ -44,7 +44,7 @@
 ## PyQt5 2
 - PyQt5 학습
   - QtDesigner로 UI 설정
-  - 네이버 API로 네이버뉴스, 영화 검색앱 만들기
+  - 네이버 API로 네이버뉴스, 영화 검색앱 만들기 [링크](https://github.com/leesominn/StudyBigData/tree/main/pyqt02)
 
 ## PyQt5 3
 - PyQt5 학습
